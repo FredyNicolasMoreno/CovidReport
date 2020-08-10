@@ -8,6 +8,6 @@ module.exports = () => {
     user: 'root',
     password: '',
     // password: 'admin123', //Para container
-    database: 'load_balance_images'
+    database: 'covid_reports'
   });
 }

@@ -6,11 +6,13 @@ const path = require('path');
 const uuid = require('uuid');
 const port = process.argv[2];
 const indexRoutes = require('./routes/index');
+var imgName = "";
 
 
 const storage = multer.diskStorage({
      destination: path.join(__dirname, '/public'),
      filename: (req, file, cb) => {
+          imgName = file.originalname;
          cb(null, uuid.v4() + path.extname(file.originalname).toLowerCase());
      }
  });
