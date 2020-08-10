@@ -42,7 +42,8 @@ router.post('/data', (req, res) => {
           }
      });
 
-     res.sendFile(path.join(__dirname, '../../../client', 'index.html'));
+     //res.sendFile(path.join(__dirname, '../../../client', 'index.html'));
+	res.send('Datos enviados');
 });
 
 router.get('/path', (req, res) => res.sendFile(path.join(__dirname+'../../../client/index.html')));
