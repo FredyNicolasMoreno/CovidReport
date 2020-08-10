@@ -19,7 +19,7 @@ router.post('/data', (req, res) => {
      const form = new formData();
      form.append('image', fs.createReadStream(req.file.path));
 
-     axios.post('http://localhost:8081', form, {
+     axios.post('http://192.168.100.36:8081', form, {
           headers: {
                'Content-Type': `multipart/form-data; boundary=${form._boundary}`
           }
