@@ -1,13 +1,16 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const bodyParser = require('body-parser')
+const port = process.argv[2]
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
 app.get('/item', (req, res) => {
      console.log("Entra");
      console.log(req.query);
-     res.redirect('http://127.0.0.1:5500/client/index.html');
 });
 
-app.listen(port, () => console.log(`Example app listening on port port!`))
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
