@@ -8,9 +8,9 @@ const PDF = require('pdfkit');
 const formData = require('form-data');
 const axios = require('axios');
 const fs = require('fs');
-var doc = new PDF();
+//var doc = new PDF();
 var data = "eje";
-doc.pipe(fs.createWriteStream(__dirname +'/../public/covid_report.pdf'));
+//doc.pipe(fs.createWriteStream(__dirname +'/../public/covid_report.pdf'));
 
 router.get('/', (req, res) => res.send('Hello World!'));
 
@@ -59,6 +59,8 @@ router.get('/pdf', (req, res) => {
 });
 
 function generatePDF(value, res) {
+     var doc = new PDF();
+     doc.pipe(fs.createWriteStream(__dirname +'/../public/covid_report.pdf'));
      doc.text('CASOS COVID POR CIUDAD', {
           align: 'center'
      });

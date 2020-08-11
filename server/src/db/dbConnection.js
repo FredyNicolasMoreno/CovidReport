@@ -6,7 +6,7 @@ module.exports = () => {
     //host: 'db', //Para container
     port: 3306,
     user: 'root',
-    password: '',
+    password: 'admin123',
     // password: 'admin123', //Para container
     database: 'covid_reports'
   });
