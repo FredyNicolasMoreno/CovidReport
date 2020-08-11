@@ -3,10 +3,14 @@ const dbConnection = require('../db/dbConnection');
 const connection = dbConnection();
 const router = express.Router();
 const path = require('path');
+const PDF = require('pdfkit');
 
 const formData = require('form-data');
 const axios = require('axios');
 const fs = require('fs');
+var doc = new PDF();
+var data = "eje";
+doc.pipe(fs.createWriteStream(__dirname +'/../public/covid_report.pdf'));
 
 router.get('/', (req, res) => res.send('Hello World!'));
 
@@ -45,6 +49,27 @@ router.post('/data', (req, res) => {
      //res.sendFile(path.join(__dirname, '../../../client', 'index.html'));
 	res.send('Datos enviados');
 });
+
+router.get('/pdf', (req, res) => {
+     console.log('Request PDF');
+     connection.query("SELECT location, COUNT(id) AS cant FROM covid_reports GROUP BY location", (err, rows)=>{
+          if(err) throw err;
+          generatePDF(rows, res);
+     });
+});
+
+function generatePDF(value, res) {
+     doc.text('CASOS COVID POR CIUDAD', {
+          align: 'center'
+     });
+     doc.text('\n\n\n');
+     for(var i=0; i<value.length; i++){
+          doc.text("- " +value[i].location +": " +value[i].cant);
+          console.log("Ciudad: " +value[i].location +": " +value[i].cant);
+     }
+     doc.end();
+     res.send(value);
+}
 
 router.get('/path', (req, res) => res.sendFile(path.join(__dirname+'../../../client/index.html')));
 
