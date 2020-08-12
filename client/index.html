@@ -19,37 +19,69 @@
         <div class="container">
             <h1 class="text-center m-4 text-primary">REPORTES COVID</h1>
 
-            <form action="http://localhost" method="POST" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="name">Nombre</label>
-                    <input type="text" class="form-control" id="name" name="name" aria-describedby="Nombre" />
+            <div class="row mt-3">
+                <div class="col-md-4"><h1></h1></div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="http://localhost" method="POST" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="name">Nombre</label>
+                                    <input type="text" class="form-control" id="name" name="name" aria-describedby="Nombre" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Ubicación</label>
+                                    <input type="text" class="form-control" id="address" name="address" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="image">Foto</label>
+                                    <input type="file" class="form-control" id="image" name="image" />
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="address">Ubicación</label>
-                    <input type="text" class="form-control" id="address" name="address" />
+            </div>
+            
+            <div class="mt-5">
+                <h2 class="text-info">Servicios</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="text-center">Generación de PDF</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="name">Ciudad</label>
+                                    <input type="text" class="form-control" id="Ciudad" name="city" v-model="city" aria-describedby="Ciudad" />
+                                    <div class="mt-4">
+                                        <button class="btn btn-primary btn-block" v-on:click="getPDF()">
+                                            Generar PDF
+                                        </button>
+                                        <p class="text-success">{{ message}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="text-center">Generación de Gráfico</h2>
+                            </div>
+                            <div class="card-body">
+                                <button class="btn btn-primary btn-block" v-on:click="drawStart()">
+                                    Generar Gráfico
+                                </button>
+                                <div id="piechart" style="width: 750px; height: 500px;"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="image">Foto</label>
-                    <input type="file" class="form-control" id="image" name="image" />
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-            <div class="m-4">
-                <button class="btn btn-primary" v-on:click="drawStart()">
-                    Draw Chart
-                </button>
             </div>
 
-            <div id="piechart" style="width: 900px; height: 500px;"></div>
-
-            <div class="m-4">
-                <button class="btn btn-primary" v-on:click="getTime()">
-                    Get time froms server
-                </button>
-            </div>
-            <div class="mb-12">
-                <p>El tiempo es {{ time }}.</p>
-            </div>
             <ol>
                 <li>
                     {{ message}}

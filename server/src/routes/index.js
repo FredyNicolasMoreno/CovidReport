@@ -50,9 +50,22 @@ router.post('/data', (req, res) => {
 	res.send('Datos enviados');
 });
 
+router.get('/chart', (req, res) => {
+     console.log('Grafico');
+     connection.query("SELECT location, COUNT(id) AS cant FROM covid_reports GROUP BY location", (err, rows)=>{
+          if(err) throw err;
+          generateCases(rows, res);
+     });
+});
+
+function generateCases(value, res){
+     res.send(value);
+}
+
 router.get('/pdf', (req, res) => {
      console.log('Request PDF');
-     connection.query("SELECT location, COUNT(id) AS cant FROM covid_reports GROUP BY location", (err, rows)=>{
+     console.log('Ciudad que llega: ' +req.query.city);
+     connection.query("SELECT name FROM covid_reports WHERE UPPER(location) LIKE UPPER('"+req.query.city+"')", (err, rows)=>{
           if(err) throw err;
           generatePDF(rows, res);
      });
@@ -66,8 +79,7 @@ function generatePDF(value, res) {
      });
      doc.text('\n\n\n');
      for(var i=0; i<value.length; i++){
-          doc.text("- " +value[i].location +": " +value[i].cant);
-          console.log("Ciudad: " +value[i].location +": " +value[i].cant);
+          doc.text("- " +value[i].name);
      }
      doc.end();
      res.send(value);
