@@ -8,9 +8,7 @@ const PDF = require('pdfkit');
 const formData = require('form-data');
 const axios = require('axios');
 const fs = require('fs');
-//var doc = new PDF();
 var data = "eje";
-//doc.pipe(fs.createWriteStream(__dirname +'/../public/covid_report.pdf'));
 
 router.get('/', (req, res) => res.send('Hello World!'));
 
@@ -46,7 +44,6 @@ router.post('/data', (req, res) => {
           }
      });
 
-     //res.sendFile(path.join(__dirname, '../../../client', 'index.html'));
 	res.send('Datos enviados');
 });
 

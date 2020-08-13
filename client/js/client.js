@@ -46,21 +46,21 @@ var app = new Vue({
         );
     },
     drawStart: function () {
-      axios.get('http://localhost:3000/chart').
+      axios.get('http://localhost:8081/chart').
       then(response => {
         google.charts.load("current", { packages: ["corechart"] });
         google.charts.setOnLoadCallback(drawChart);
-  
+        console.log(response.data);
+        let result = response.data.split(",");
         function drawChart() {
 
           cases = [];
           cases.push(["Ciudad", "Cantidad"]);
-          for (let x = 0; x < response.data.length; x++){
-            cases.push([
-              response.data[x].location,
-              response.data[x].cant
-            ]);
+          for (let x = 0; x < result.length; x++){
+            let casePerCity = result[x].split("-");
+            cases.push([casePerCity[0],parseInt(casePerCity[1],10)]);
           }
+          console.log(cases);
           var data = google.visualization.arrayToDataTable(cases);
   
           var options = {
