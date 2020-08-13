@@ -60,8 +60,6 @@ function generateCases(value, res){
 }
 
 router.get('/pdf', (req, res) => {
-     console.log('Request PDF');
-     console.log('Ciudad que llega: ' +req.query.city);
      connection.query("SELECT name FROM covid_reports WHERE UPPER(location) LIKE UPPER('"+req.query.city+"')", (err, rows)=>{
           if(err) throw err;
           generatePDF(rows, res);
@@ -79,6 +77,7 @@ function generatePDF(value, res) {
           doc.text("- " +value[i].name);
      }
      doc.end();
+     console.log('Request PDF');
      res.send(value);
 }
 

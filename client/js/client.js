@@ -10,7 +10,7 @@ var app = new Vue({
         console.log('entra para petición');
         console.log(this.city);
         axios
-        .get('http://localhost:3000/pdf', {params: {city:this.city}})
+        .get('http://192.168.100.36/pdf', {params: {city:this.city}})
         .then(response => {
             let result = "";
             let pdfName = 'covid_reports'; 
@@ -46,7 +46,7 @@ var app = new Vue({
         );
     },
     drawStart: function () {
-      axios.get('http://localhost:8081/chart').
+      axios.get('http://192.168.100.36:8081/chart').
       then(response => {
         google.charts.load("current", { packages: ["corechart"] });
         google.charts.setOnLoadCallback(drawChart);
